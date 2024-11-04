@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+
+* {
+  color: #1d1e20;
+  font-family: monospace;
+}
+
+    body {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    padding-top: 60px;
+    scroll-behavior: smooth;
+    margin: 0;  
+    
+    &.nav-open {
+    overflow-y: hidden;
+    }
+  }
+    
+    img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    }
+    .header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 3;
+    
+    background-color: #fff;
+    
+    &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100% - 2rem, 65rem);
+    margin-inline: auto;
+    height: 60px;
+    }
+    }
+    
+    .logo {
+    font-weight: 900;
+    letter-spacing: 0.1rem;
+    }
+    
+    .nav {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    justify-content: center;
+    gap: 2rem;
+    
+    a {
+    color: #000;
+    text-decoration: none;
+    opacity: 0.6;
+    
+    &:hover {
+    opacity: 1;
+    }
+    }
+    }
+    
+    .wrapper {
+    width: min(100% - 2rem, 65rem);
+    margin-inline: auto;
+    
+    transform: translateX(0);
+    transition: transform 400ms linear;
+    
+    .nav-open & {
+    transform: translateX(-5%);
+    }
+    }
+    
+    .product-top {
+    position: relative;
+    display: flex;
+    }
+    .product__gallery {
+    flex-shrink: 0;
+    }
+
+    .product__gallery img {
+      width: 240px;
+    }
+    
+    .product__sizes {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    
+    span {
+    height: 30px;
+    width: 30px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    border: 1px solid #000;
+    }
+    }
+    .product__info {
+    position: relative;
+    
+    h1 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+    }
+    }
+    
+    .product__price {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    }
+    
+    .product__short {
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    }
+    
+    .product__desc {
+    position: sticky;
+    top: 0;
+    padding: 10vh 0 10vh 5vh;
+    }
+    
+    .product__btn {
+    position: relative;
+    display: inline-flex;
+    border: none;
+    padding: 1rem 2.5rem;
+
+    
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    
+    background-color: red;
+    transition: background-color 0.3s;
+    
+    &:hover {
+    background-color: #1d1e20;
+    }
+    &:hover::after,
+    &:hover::before {
+    transform: scale(1, 1);
+    }
+    &::after,
+    &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transition: all 0.5s;
+    }
+    &::before {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    transform: scale(0, 1);
+    transform-origin: center;
+    }
+    }
+
+    .product__btn a {
+      text-decoration: none;
+      color: #fff;
+    }
+    
+    .product__type {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    }
+    
+    .product-bottom {
+    margin-top: 2rem;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+    
+    border-top: 1px solid #eee;
+    
+    h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    
+    &:not(:first-child) {
+    margin-top: 3rem;
+    }
+    }
+    
+    p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    }
+    }
+    
+    .cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    width: 30vw;
+    
+    background-color: #fff;
+    padding: 5vw;
+    transform: translateX(100%);
+    transition: all 0.6s ease-in-out;
+    
+    &__inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    }
+    
+    .nav-open & {
+    transform: translateX(0);
+    }
+    
+    &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    p {
+    font-size: 1.5rem;
+    font-weight: 800;
+    }
+    }
+    
+    &__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
+    }
+    
+    .close-cart {
+    border: none;
+    appearance: none;
+    font-size: 1rem;
+    background: transparent;
+    cursor: pointer;
+    }
+    
+    .overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(#000, 0.5);
+    z-index: 9;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    
+    .nav-open & {
+    opacity: 1;
+    visibility: visible;
+    }
+    }
+
+    .header {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  border: 5px solid #1d1e20;
+  width: 90%;
+  border-radius: 30px;
+  margin: auto;
+  position: fixed;
+  top: 10px;
+  right: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.header .nav-content a {
+  text-decoration: none;
+  padding-inline: 10px;
+}
+
+.header .nav-content:hover {
+  background-color: #1d1e2081;
+
+}
+
+.header .nav-content {
+  padding: 10px;
+  padding-inline: 40px;
+  border-radius: 10px;
+}
+
+#logo {
+  font-weight: 900;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#ct {
+  cursor: pointer;
+}
+
+#logo:hover {
+  border-bottom: 3px solid #1d1e20;
+  transition: all 0.2s ease 0.2s;
+}
+
+.header .nav-bar {
+  padding-inline-end: 20px;
+  padding: 10px;
+}
+
+.header .nav-bar a {
+  border: 3px solid #1d1e20;
+  padding-inline: 5px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.header .nav-bar a:hover {
+  background-color: #1d1e20;
+  color: white;
+  transition: all 0.5s ease-in-out 0.2s;
+}
+
+.wrapper {
+  margin-top: 8rem;
+}
+
+    
+    </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="nav-content">
+      <a href="index.html#" id="logo">Clozet 100</a>
+      <a href="index.html#home">Home</a>
+      <a href="index.html#products">Products</a>
+      <a href="index.html#about">About</a>
+  </div>
+  <nav class="nav-bar">
+      <a href="login.html">Login</a>
+      <a id="ct">Cart</a>
+      <div id="count"></div>
+  </nav>
+</header>
+
+<div class="wrapper">
+<div class="product-top">
+<div class="product__gallery">
+<img src="images/p12.webp" alt="">
+</div>
+<div class="product__info">
+<div class="product__desc">
+<div class="product__type">Running</div>
+<h1>Product Name</h1>
+<p class="product__price">$649.00</p>
+<div class="product__short">
+<p>The Faithless Thermal Windbreaker brings the cold during and after all your workouts. It’s composed of thermal fabric with a lightweight insulation padding neatly tucked away to keep you warm and dry for good.</p>
+</div>
+<div class="product__sizes">
+<span>S</span>
+<span>M</span>
+<span>L</span>
+</div>
+<button class="product__btn" onclick="myFunction()"><a href="">Add to cart</a></button>
+</div>
+</div>
+</div>
+<div class="product-bottom">
+<h2>Description</h2>
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi omnis aut culpa blanditiis, animi at atque ullam doloremque quae fugit rem quis quas numquam? Aspernatur laudantium perspiciatis nesciunt maiores unde.</p>
+<h2>Reviews</h2>
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi omnis aut culpa blanditiis, animi at atque ullam doloremque quae fugit rem quis quas numquam? Aspernatur laudantium perspiciatis nesciunt maiores unde.</p>
+<h2>Related</h2>
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi omnis aut culpa blanditiis, animi at atque ullam doloremque quae fugit rem quis quas numquam? Aspernatur laudantium perspiciatis nesciunt maiores unde.</p>
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi omnis aut culpa blanditiis, animi at atque ullam doloremque quae fugit rem quis quas numquam? Aspernatur laudantium perspiciatis nesciunt maiores unde.</p>
+
+<h2>LookBook</h2>
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi omnis aut culpa blanditiis, animi at atque ullam doloremque quae fugit rem quis quas numquam? Aspernatur laudantium perspiciatis nesciunt maiores unde.</p>
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi omnis aut culpa blanditiis, animi at atque ullam doloremque quae fugit rem quis quas numquam? Aspernatur laudantium perspiciatis nesciunt maiores unde.</p>
+</div>
+</div>
+<div class="cart">
+<div class="cart__inner">
+<header class="cart__header">
+<p>My cart</p>
+<button class="close-cart">Close(x)</button>
+</header>
+<div class="cart__content">
+Your cart is empty
+</div>
+</div>
+</div>
+<script src="index.js"></script>
+</body>
+</html>

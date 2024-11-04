@@ -1,0 +1,94 @@
+body {
+  scroll-behavior: smooth;
+  margin: 0;
+}
+
+* {
+  color: #1d1e20;
+  font-family: monospace;
+}
+
+.header {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  border: 5px solid #1d1e20;
+  width: 90%;
+  border-radius: 30px;
+  margin: auto;
+  position: fixed;
+  top: 10px;
+  right: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.header .nav-content a {
+  text-decoration: none;
+  padding-inline: 10px;
+}
+
+.header .nav-content:hover {
+  background-color: #1d1e2081;
+
+}
+
+.header .nav-content {
+  padding: 10px;
+  padding-inline: 40px;
+  border-radius: 10px;
+}
+
+#logo {
+  font-weight: 900;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#ct {
+  cursor: pointer;
+}
+
+#logo:hover {
+  border-bottom: 3px solid #1d1e20;
+  transition: all 0.2s ease 0.2s;
+}
+
+.header .nav-bar {
+  padding-inline-end: 20px;
+  padding: 10px;
+}
+
+.header .nav-bar a {
+  border: 3px solid #1d1e20;
+  padding-inline: 5px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.header .nav-bar a:hover {
+  background-color: #1d1e20;
+  color: white;
+  transition: all 0.5s ease-in-out 0.2s;
+}
+
+#count {
+  font-family: monospace;
+  text-align: center;
+  z-index: 1000;
+  left: 108px;
+  bottom: 35px;
+  position: relative;
+  background-color: rgb(249, 44, 44);
+  width: 20px;
+  border-radius: 100%;
+  color: white;
+}
+
+#main {
+  margin-top: 12rem;
+}
+
+#main h2 {
+  text-align: center;
+}
